@@ -85,6 +85,7 @@ export class SmsService {
           report: sms.report,
           timeout: 20,
         },
+        timeout: 10000,
       },
     );
 

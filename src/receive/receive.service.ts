@@ -32,12 +32,13 @@ export class ReceiveService {
         port: message.port,
       });
 
-      console.log(response);
       // Parse the response
       const reports = response.report[0];
       const values: Reports[] = Object.values(reports).map(
         (report) => report[0],
       );
+
+      console.log(Object.values(reports));
 
       // Return the response
       if (values.filter((value) => value.result === 'fail').length > 0) {
