@@ -40,8 +40,6 @@ export class ReceiveService {
         (report) => report[0],
       );
 
-      console.log(Object.values(reports));
-
       // Return the response
       if (values.filter((value) => value.result === 'fail').length > 0) {
         return {
