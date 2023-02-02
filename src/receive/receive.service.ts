@@ -22,41 +22,55 @@ export class ReceiveService {
    */
   async sendMessageToAPI(message: SMSDto): Promise<ReportsResponse> {
     // Call the API via the SMS service
-    const response: any = await this.smsService.sendSMS({
-      message: message.message,
-      phonenumber: message.phonenumber,
-      username: this.configService.get('mbox_user'),
-      password: this.configService.get('mbox_password'),
-      port: message.port,
-    });
 
-    // Parse the response
-    const reports = response.report[0];
-    const values: Reports[] = Object.values(reports).map((report) => report[0]);
+    try {
+      const response: any = await this.smsService.sendSMS({
+        message: message.message,
+        phonenumber: message.phonenumber,
+        username: this.configService.get('mbox_user'),
+        password: this.configService.get('mbox_password'),
+        port: message.port,
+      });
 
-    // Return the response
-    if (values.filter((value) => value.result === 'fail').length > 0) {
+      console.log(response);
+      // Parse the response
+      const reports = response.report[0];
+      const values: Reports[] = Object.values(reports).map(
+        (report) => report[0],
+      );
+
+      // Return the response
+      if (values.filter((value) => value.result === 'fail').length > 0) {
+        return {
+          message: `${
+            values.filter((value) => value.result === 'fail').length
+          } mensajes enviados con error`,
+          reports: values,
+        };
+      }
+
+      const postRes = await axios.post(
+        'https://hooks.chatapi.net/workflows/yUMZYLxOOcfB/tPOuncOqcLXS',
+        {
+          phone: message.phonenumber,
+          status:
+            values[values.length - 1].result == 'sending' ? 'Enviado' : 'Error',
+        },
+      );
+
       return {
-        message: `${
-          values.filter((value) => value.result === 'fail').length
-        } mensajes enviados con error`,
+        message: `${values.length} mensajes enviados con éxito`,
         reports: values,
       };
+    } catch (error) {
+      const postRes = await axios.post(
+        'https://hooks.chatapi.net/workflows/yUMZYLxOOcfB/tPOuncOqcLXS',
+        {
+          phone: message.phonenumber,
+          status: 'Error',
+        },
+      );
     }
-
-    const postRes = await axios.post(
-      'https://hooks.chatapi.net/workflows/yUMZYLxOOcfB/tPOuncOqcLXS',
-      {
-        phone: message.phonenumber,
-        status:
-          values[values.length - 1].result == 'sending' ? 'Enviado' : 'Error',
-      },
-    );
-
-    return {
-      message: `${values.length} mensajes enviados con éxito`,
-      reports: values,
-    };
   }
 
   /**

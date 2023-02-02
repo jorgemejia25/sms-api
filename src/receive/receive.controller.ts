@@ -12,8 +12,6 @@ export class ReceiveController {
 
   @Post('message')
   async getInbox(@Body() body: Message) {
-    console.log(body);
-
     return this.receiveService.sendMessageToAPI({
       message: body.message.text,
       phonenumber: body.contactId,
@@ -25,8 +23,6 @@ export class ReceiveController {
     @Body() body: Message,
     @Param('port') port: string,
   ): Promise<ReportsResponse> {
-    console.log(body);
-
     return this.receiveService.sendMessageToAPI({
       message: body.message.text,
       phonenumber: body.contactId,
