@@ -83,7 +83,7 @@ export class SmsService {
           message: sms.message,
           port: sms.port,
           report: sms.report,
-          timeout: 20,
+          timeout: 1000,
         },
         timeout: 10000,
       },

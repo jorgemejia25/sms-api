@@ -23,6 +23,8 @@ export class ReceiveService {
   async sendMessageToAPI(message: SMSDto): Promise<ReportsResponse> {
     // Call the API via the SMS service
 
+    console.log(message);
+
     try {
       const response: any = await this.smsService.sendSMS({
         message: message.message,
