@@ -31,7 +31,7 @@ export class SmsService {
 
     const data = {
       channelId: this.configService.get('channel_id'),
-      contactId: `+${inbox.phonenumber}`,
+      contactId: `+${inbox.phonenumber.replace('+', '')}`,
       events: [
         {
           type: 'message',
