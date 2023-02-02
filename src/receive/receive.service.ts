@@ -66,6 +66,8 @@ export class ReceiveService {
         reports: values,
       };
     } catch (error) {
+      console.log(error);
+
       const postRes = await axios.post(
         'https://hooks.chatapi.net/workflows/yUMZYLxOOcfB/tPOuncOqcLXS',
         {
