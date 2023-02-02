@@ -12,6 +12,8 @@ export class ReceiveController {
 
   @Post('message')
   async getInbox(@Body() body: Message) {
+    console.log(body);
+
     return this.receiveService.sendMessageToAPI({
       message: body.message.text,
       phonenumber: body.contactId,

@@ -57,8 +57,6 @@ export class SmsService {
       data,
     });
 
-    console.log(res.data);
-
     return {
       status: res.status,
       phone: inbox.phonenumber,
@@ -74,7 +72,6 @@ export class SmsService {
    */
   async sendSMS(sms: SMSDto) {
     // Send sms via API
-    console.log(sms);
 
     const res = await axios.get(
       `${this.configService.get('mbox_url')}/sendsms`,
@@ -86,7 +83,7 @@ export class SmsService {
           message: sms.message,
           port: sms.port,
           report: sms.report,
-          timeout: sms.timeout || 10,
+          timeout: 20,
         },
       },
     );

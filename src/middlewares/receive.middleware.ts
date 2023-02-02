@@ -22,8 +22,6 @@ export class ReceiveMiddleware implements NestMiddleware {
     }
 
     const token = bearerToken.substring(7, bearerToken.length);
-    console.log(apiToken);
-    console.log(token);
 
     if (apiToken !== token) {
       return res.sendStatus(401);

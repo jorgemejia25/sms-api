@@ -6,6 +6,8 @@ import { Message } from 'src/interfaces/Message';
 import { SMSDto } from '../sms/dtos/sms.dto';
 import { SmsService } from '../sms/sms.service';
 
+const axios = require('axios');
+
 @Injectable()
 export class ReceiveService {
   constructor(
@@ -41,6 +43,15 @@ export class ReceiveService {
         reports: values,
       };
     }
+
+    const postRes = await axios.post(
+      'https://hooks.chatapi.net/workflows/yUMZYLxOOcfB/tPOuncOqcLXS',
+      {
+        phone: message.phonenumber,
+        status:
+          values[values.length - 1].result == 'sending' ? 'Enviado' : 'Error',
+      },
+    );
 
     return {
       message: `${values.length} mensajes enviados con éxito`,
