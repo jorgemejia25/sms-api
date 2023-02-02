@@ -35,7 +35,7 @@ export class ReceiveService {
       });
 
       // Parse the response
-      const reports = response.report[0];
+      const reports = response.report ? response.report : [];
       const values: Reports[] = Object.values(reports).map(
         (report) => report[0],
       );
