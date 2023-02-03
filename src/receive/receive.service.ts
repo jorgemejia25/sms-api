@@ -23,10 +23,8 @@ export class ReceiveService {
   async sendMessageToAPI(message: SMSDto): Promise<ReportsResponse> {
     // Call the API via the SMS service
 
-    console.log(message);
-
     try {
-      const response: any = await this.smsService.sendSMS({
+      const { report }: any = await this.smsService.sendSMS({
         message: message.message,
         phonenumber: message.phonenumber,
         username: this.configService.get('mbox_user'),
@@ -34,7 +32,7 @@ export class ReceiveService {
         port: message.port,
       });
 
-      console.log(JSON.stringify(response));
+      console.log(Object.values(report));
 
       const postRes = await axios.post(
         'https://hooks.chatapi.net/workflows/yUMZYLxOOcfB/tPOuncOqcLXS',
@@ -45,7 +43,7 @@ export class ReceiveService {
       );
 
       return {
-        reports: response.reports,
+        report,
       };
     } catch (error) {
       console.log(error);

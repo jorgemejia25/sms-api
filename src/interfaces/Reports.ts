@@ -7,5 +7,5 @@ export interface Reports {
 }
 
 export interface ReportsResponse {
-  reports: Reports[];
+  report: Reports[];
 }
