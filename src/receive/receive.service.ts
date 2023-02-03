@@ -26,7 +26,7 @@ export class ReceiveService {
     console.log(message);
 
     try {
-      const { reports }: any = await this.smsService.sendSMS({
+      const response: any = await this.smsService.sendSMS({
         message: message.message,
         phonenumber: message.phonenumber,
         username: this.configService.get('mbox_user'),
@@ -34,7 +34,7 @@ export class ReceiveService {
         port: message.port,
       });
 
-      console.log(Object.values(reports));
+      console.log(JSON.stingify(response));
 
       const postRes = await axios.post(
         'https://hooks.chatapi.net/workflows/yUMZYLxOOcfB/tPOuncOqcLXS',
@@ -45,7 +45,7 @@ export class ReceiveService {
       );
 
       return {
-        reports,
+        reports: response.reports,
       };
     } catch (error) {
       console.log(error);
