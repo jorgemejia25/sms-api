@@ -8,6 +8,14 @@ import { SmsService } from '../sms/sms.service';
 
 const axios = require('axios');
 
+interface Report {
+  port: string;
+  phonenumber: string;
+  time: string;
+  id: string;
+  result: string;
+}
+
 @Injectable()
 export class ReceiveService {
   constructor(
@@ -33,6 +41,12 @@ export class ReceiveService {
       });
 
       const reports = Object.values(report[0]);
+
+      const failedReports = reports.filter(
+        (r: Report[]) => r[0].result === 'sending',
+      );
+
+      console.log(failedReports);
 
       const postRes = await axios.post(
         'https://hooks.chatapi.net/workflows/yUMZYLxOOcfB/tPOuncOqcLXS',
