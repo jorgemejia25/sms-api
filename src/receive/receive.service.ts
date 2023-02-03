@@ -34,7 +34,7 @@ export class ReceiveService {
         port: message.port,
       });
 
-      console.log(JSON.stingify(response));
+      console.log(JSON.stringify(response));
 
       const postRes = await axios.post(
         'https://hooks.chatapi.net/workflows/yUMZYLxOOcfB/tPOuncOqcLXS',
