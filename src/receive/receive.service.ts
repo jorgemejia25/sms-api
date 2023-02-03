@@ -43,7 +43,7 @@ export class ReceiveService {
       const reports = Object.values(report[0]);
 
       const failedReports = reports.filter(
-        (r: Report[]) => r[0].result === 'sending',
+        (r: Report[]) => r[0].result === 'failed',
       );
 
       console.log(failedReports);
@@ -52,7 +52,7 @@ export class ReceiveService {
         'https://hooks.chatapi.net/workflows/yUMZYLxOOcfB/tPOuncOqcLXS',
         {
           phone: message.phonenumber,
-          status: 'Success',
+          status: failedReports.length > 0 ? 'Error al enviar' : 'Éxito',
         },
       );
 
