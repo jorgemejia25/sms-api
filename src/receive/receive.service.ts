@@ -26,7 +26,7 @@ export class ReceiveService {
     console.log(message);
 
     try {
-      const response: any = await this.smsService.sendSMS({
+      const { reports }: any = await this.smsService.sendSMS({
         message: message.message,
         phonenumber: message.phonenumber,
         username: this.configService.get('mbox_user'),
@@ -34,34 +34,18 @@ export class ReceiveService {
         port: message.port,
       });
 
-      // Parse the response
-      const reports = response.report ? response.report : [];
-      const values: Reports[] = Object.values(reports).map(
-        (report) => report[0],
-      );
-
-      // Return the response
-      if (values.filter((value) => value.result === 'fail').length > 0) {
-        return {
-          message: `${
-            values.filter((value) => value.result === 'fail').length
-          } mensajes enviados con error`,
-          reports: values,
-        };
-      }
+      console.log(Object.values(reports));
 
       const postRes = await axios.post(
         'https://hooks.chatapi.net/workflows/yUMZYLxOOcfB/tPOuncOqcLXS',
         {
           phone: message.phonenumber,
-          status:
-            values[values.length - 1].result == 'sending' ? 'Enviado' : 'Error',
+          status: 'Success',
         },
       );
 
       return {
-        message: `${values.length} mensajes enviados con éxito`,
-        reports: values,
+        reports,
       };
     } catch (error) {
       console.log(error);

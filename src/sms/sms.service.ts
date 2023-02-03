@@ -87,8 +87,6 @@ export class SmsService {
       },
     );
 
-    console.log(res.data);
-
     return res.data;
   }
 }

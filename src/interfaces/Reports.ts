@@ -7,6 +7,5 @@ export interface Reports {
 }
 
 export interface ReportsResponse {
-  message: string;
   reports: Reports[];
 }
