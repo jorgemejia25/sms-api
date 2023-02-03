@@ -27,7 +27,6 @@ export class SmsService {
     // Message: The message received
     // Contact id: The phone number that sent the message with the format 50299999999
     // Text: The message received
-    console.log(inbox);
 
     const data = {
       channelId: this.configService.get('channel_id'),
@@ -88,7 +87,7 @@ export class SmsService {
       },
     );
 
-    console.log(res);
+    console.log(res.data);
 
     return res.data;
   }
