@@ -32,7 +32,7 @@ export class ReceiveService {
         port: message.port,
       });
 
-      console.log(Object.values(report));
+      const reports = Object.values(report[0]);
 
       const postRes = await axios.post(
         'https://hooks.chatapi.net/workflows/yUMZYLxOOcfB/tPOuncOqcLXS',
