@@ -57,6 +57,8 @@ export class ReceiveService {
       );
 
       return {
+        port: message.port.toString(),
+        date: new Date().toISOString(),
         report,
       };
     } catch (error) {
