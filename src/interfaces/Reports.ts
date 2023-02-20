@@ -7,5 +7,7 @@ export interface Reports {
 }
 
 export interface ReportsResponse {
+  port: string;
+  date: string;
   report: Reports[];
 }
