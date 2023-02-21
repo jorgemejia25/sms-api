@@ -30,8 +30,8 @@ export class InfoService {
   }
 
   decrementRestantes(port: number) {
-    const info = this.info.find((info) => info.puerto === port);
-    info.restantes--;
+    const index = this.info.findIndex((info) => info.puerto === port);
+    this.info[index].restantes -= 1;
     this.saveInfo();
   }
 
