@@ -1,1 +1,8 @@
-{"data":[{"puerto":1,"tiempo":1,"mensajes":1000,"restantes":1000},{"puerto":2,"tiempo":2,"mensajes":1000,"restantes":1000},{"puerto":3,"tiempo":3,"mensajes":1000,"restantes":1000},{"puerto":4,"tiempo":4,"mensajes":1000,"restantes":1000}]}
+{
+  "data": [
+    { "puerto": 1, "tiempo": 15, "mensajes": 1000, "restantes": 1000 },
+    { "puerto": 2, "tiempo": 15, "mensajes": 1000, "restantes": 1000 },
+    { "puerto": 3, "tiempo": 15, "mensajes": 1000, "restantes": 1000 },
+    { "puerto": 4, "tiempo": 15, "mensajes": 1000, "restantes": 1000 }
+  ]
+}
