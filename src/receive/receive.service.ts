@@ -48,7 +48,7 @@ export class ReceiveService {
         (r: Report[]) => r[0].result === 'failed',
       );
 
-      this.infoService.decrementRestantes(message.port);
+      this.infoService.decrementRestantes((reports as any)[0].port);
 
       const postRes = await axios.post(
         'https://hooks.chatapi.net/workflows/yUMZYLxOOcfB/tPOuncOqcLXS',
