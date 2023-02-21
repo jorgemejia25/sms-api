@@ -48,6 +48,8 @@ export class ReceiveService {
         (r: Report[]) => r[0].result === 'failed',
       );
 
+      console.log(+reports[0][0].port);
+
       this.infoService.decrementRestantes(+reports[0][0].port);
 
       const postRes = await axios.post(
