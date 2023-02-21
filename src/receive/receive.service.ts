@@ -48,7 +48,7 @@ export class ReceiveService {
         (r: Report[]) => r[0].result === 'failed',
       );
 
-      console.log(reports);
+      console.log(reports[0][0]);
 
       this.infoService.decrementRestantes((reports as any)[0].port);
 
