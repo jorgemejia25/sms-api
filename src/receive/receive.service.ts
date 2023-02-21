@@ -1,6 +1,7 @@
 import { Reports, ReportsResponse } from 'src/interfaces/Reports';
 
 import { ConfigService } from '@nestjs/config/dist';
+import { InfoService } from 'src/info/info.service';
 import { Injectable } from '@nestjs/common';
 import { Message } from 'src/interfaces/Message';
 import { SMSDto } from '../sms/dtos/sms.dto';
@@ -21,6 +22,7 @@ export class ReceiveService {
   constructor(
     private smsService: SmsService,
     private configService: ConfigService,
+    private infoService: InfoService,
   ) {}
 
   /**
@@ -46,7 +48,7 @@ export class ReceiveService {
         (r: Report[]) => r[0].result === 'failed',
       );
 
-      console.log(failedReports);
+      this.infoService.decrementRestantes(message.port);
 
       const postRes = await axios.post(
         'https://hooks.chatapi.net/workflows/yUMZYLxOOcfB/tPOuncOqcLXS',
