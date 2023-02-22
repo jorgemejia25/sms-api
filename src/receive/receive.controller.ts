@@ -1,3 +1,4 @@
+import { InfoService } from 'src/info/info.service';
 import { Controller } from '@nestjs/common';
 import { Body, Param, Post, Query } from '@nestjs/common/decorators';
 import { ReceiveService } from './receive.service';
@@ -8,13 +9,34 @@ import { SMSDto } from '../sms/dtos/sms.dto';
 
 @Controller('receive')
 export class ReceiveController {
-  constructor(private receiveService: ReceiveService) {}
+  constructor(
+    private receiveService: ReceiveService,
+    private infoService: InfoService,
+  ) {}
 
   @Post('message')
   async getInbox(@Body() body: Message) {
     return this.receiveService.sendMessageToAPI({
       message: body.message.text,
       phonenumber: body.contactId,
+    });
+  }
+
+  @Post('rr/asc/message')
+  async getInboxAsc(@Body() body: Message) {
+    return this.receiveService.sendMessageToAPI({
+      message: body.message.text,
+      phonenumber: body.contactId,
+      port: this.infoService.roundRobinPortASC(),
+    });
+  }
+
+  @Post('rr/desc/message')
+  async getInboxDesc(@Body() body: Message) {
+    return this.receiveService.sendMessageToAPI({
+      message: body.message.text,
+      phonenumber: body.contactId,
+      port: this.infoService.roundRobinPortDESC(),
     });
   }
 

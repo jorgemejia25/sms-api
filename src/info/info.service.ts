@@ -9,6 +9,9 @@ import { Injectable } from '@nestjs/common';
 export class InfoService {
   info: Info[] = [];
 
+  lastRoundRobinPortASC = 0;
+  lastRoundRobinPortDESC = 0;
+
   constructor() {
     this.getInfo();
   }
@@ -45,5 +48,27 @@ export class InfoService {
       info.restantes = info.mensajes;
     });
     this.saveInfo();
+  }
+
+  roundRobinPortASC() {
+    const port = this.info[this.lastRoundRobinPortASC].puerto;
+
+    this.lastRoundRobinPortASC =
+      this.lastRoundRobinPortASC + 1 === this.info.length
+        ? 0
+        : this.lastRoundRobinPortASC + 1;
+
+    return port;
+  }
+
+  roundRobinPortDESC() {
+    const port = this.info[this.lastRoundRobinPortDESC].puerto;
+
+    this.lastRoundRobinPortDESC =
+      this.lastRoundRobinPortDESC - 1 === -1
+        ? this.info.length - 1
+        : this.lastRoundRobinPortDESC - 1;
+
+    return port;
   }
 }
