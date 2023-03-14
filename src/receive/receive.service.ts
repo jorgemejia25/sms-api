@@ -76,7 +76,7 @@ export class ReceiveService {
 
       return {
         port: message.port.toString(),
-        date: new Date().toISOString(),
+        date: new Date().toLocaleString(),
         report,
       };
     } catch (error) {
