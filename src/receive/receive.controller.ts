@@ -22,6 +22,15 @@ export class ReceiveController {
     });
   }
 
+  @Post('rr/message')
+  async getInboxRR(@Body() body: Message) {
+    return this.receiveService.sendMessageToAPI({
+      message: body.message.text,
+      phonenumber: body.contactId,
+      port: this.infoService.roundRobinPortASC(),
+    });
+  } 
+  
   @Post('rr/asc/message')
   async getInboxAsc(@Body() body: Message) {
     return this.receiveService.sendMessageToAPI({
