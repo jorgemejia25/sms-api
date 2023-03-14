@@ -32,8 +32,20 @@ export class ReceiveService {
    */
   async sendMessageToAPI(message: SMSDto): Promise<ReportsResponse> {
     // Call the API via the SMS service
+    const portInfo = this.infoService.getJSONPort(message.port);
 
     try {
+
+      // check if the port is defined in json
+      if (!portInfo) {
+        throw new Error('Port not found');
+      }
+
+      // check if the port message limit is reached
+      if (portInfo.restantes <= 0) {
+        throw new Error('Port limit reached');
+      }
+
       const { report }: any = await this.smsService.sendSMS({
         message: message.message,
         phonenumber: message.phonenumber,

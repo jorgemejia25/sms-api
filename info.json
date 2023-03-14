@@ -2,7 +2,6 @@
   "data": [
     { "puerto": 1, "tiempo": 15, "mensajes": 1000, "restantes": 1000 },
     { "puerto": 2, "tiempo": 15, "mensajes": 1000, "restantes": 1000 },
-    { "puerto": 3, "tiempo": 15, "mensajes": 1000, "restantes": 1000 },
-    { "puerto": 4, "tiempo": 15, "mensajes": 1000, "restantes": 1000 }
+    { "puerto": 3, "tiempo": 15, "mensajes": 1000, "restantes": 1000 }
   ]
 }
