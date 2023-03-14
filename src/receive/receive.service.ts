@@ -68,7 +68,7 @@ export class ReceiveService {
         'https://hooks.chatapi.net/workflows/yUMZYLxOOcfB/tPOuncOqcLXS',
         {
           phone: message.phonenumber,
-          data: new Date().toISOString(),
+          data: new Date().toLocaleString(),
           port: message.port,
           status: failedReports.length > 0 ? 'Error al enviar' : 'Éxito',
         },
